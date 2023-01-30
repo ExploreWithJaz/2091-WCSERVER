@@ -1,3 +1,7 @@
+//Task Name: Prelim Hands On
+//Author: Jazper Garcia
+//Section: WD-201
+
 const calculation = require('./calculation');
 
 const ratePerHour = 300;
