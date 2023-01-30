@@ -43,9 +43,7 @@ var server = http.createServer(function (req, res) {
       '<html><head><h1>This is Gallery Page</h1></head><body><p></p></body></html>'
     );
     res.end();
-  } else {
-    res.end('Invalid Request!');
-  }
+  } else res.end('Invalid Request!');
 });
 
 server.listen(5000); //6 - listen for any incoming requests
