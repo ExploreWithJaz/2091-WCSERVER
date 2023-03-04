@@ -35,6 +35,17 @@ app.get('ab*cd', function (req, res) {
   res.send('Error');
 });
 
+//forms in contacts
+app.get('/process_post', function(req, res) {
+  response = {
+      name:req.query.name,
+      subject:req.query.subject,
+      message:req.query.subject,
+      email:req.query.email
+  };
+  console.log(response);
+  res.end(JSON.stringify(response));
+
 //Setting the listener  to ENV PORT info
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
