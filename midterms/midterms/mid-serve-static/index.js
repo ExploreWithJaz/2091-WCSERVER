@@ -5,6 +5,10 @@
 const express = require('express');
 const app = express();
 
+const bodyParser = require('body-parser');
+
+const urlencodedParser = bodyParser.urlencoded({ extended: false });
+
 //4. use the middleware required for serving static
 
 app.use(express.static('public'));
@@ -36,15 +40,16 @@ app.get('ab*cd', function (req, res) {
 });
 
 //forms in contacts
-app.get('/process_post', function(req, res) {
+app.post('/process_post', urlencodedParser, function (req, res) {
   response = {
-      name:req.query.name,
-      subject:req.query.subject,
-      message:req.query.subject,
-      email:req.query.email
+    name: req.body.name,
+    subject: req.body.subject,
+    message: req.body.message,
+    email: req.body.email,
   };
   console.log(response);
   res.end(JSON.stringify(response));
+});
 
 //Setting the listener  to ENV PORT info
 const port = process.env.PORT || 3000;
