@@ -13,6 +13,52 @@ const urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 app.use(express.static('public'));
 
+//files in uploads
+const path = require('path');
+const mime = require('mime-types');
+const multer = require('multer');
+
+const fileStorage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/');
+  },
+
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  },
+});
+
+//image filter
+const upload = multer({
+  storage: fileStorage,
+  fileFilter: (req, file, cb) => {
+    if (
+      file.mimetype == 'image/png' ||
+      file.mimetype == 'image/jpg' ||
+      file.mimetype == 'image/jpeg'
+    ) {
+      cb(null, true);
+    } else {
+      cb(null, false);
+      cb(new Error('Upload only png, jpg, and jpeg format.'));
+    }
+  },
+});
+
+//file upload route
+app.post('/uploads', upload.single('myFile'), (req, res) => {
+  console.log(req.file);
+
+  req.file.mimetype = mime.lookup(req.file.originalname);
+
+  res.sendFile(path.join(__dirname, 'file-uploaded.html'));
+});
+
+//route to upload
+app.get('/file-upload', (req, res) => {
+  res.sendFile(__dirname + '/' + 'file-upload.html');
+});
+
 //create the route to serve a static index.html
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/' + 'index.html');
