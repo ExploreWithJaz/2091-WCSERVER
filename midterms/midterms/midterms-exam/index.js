@@ -31,9 +31,13 @@ app.get('/dishes', (req, res) => {
 
 //get dishes by type
 app.get('/dishes/:type', (req, res) => {
-  const dish = dishes.find((h) => h.id === parseInt(req.params.id));
-  if (!dish) return res.status(404).send('Record not found');
-  res.send(dish);
+  const dishType = req.params.type;
+  const dish = dishes.find((d) => d.type === dishType);
+  if (dish) {
+    res.json(dish);
+  } else {
+    res.status(404).send('Record not found');
+  }
 });
 
 app.listen(3000, () => console.log('Listening on port 3000'));
