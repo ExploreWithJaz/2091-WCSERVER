@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3.0.2"></script>
+    <title>Conditional Statement If, If..else, for</title>
+</head>
+<body>
+    <!-- using v-if -->
+    <div id="conditional-rendering">
+        <span v-if="seen">Now you see me</span>
+    </div>
+
+    <!-- this is hooked up to a method in the books.js -->
+    <div id="books">
+        <div v-if="showBooks">
+            <p>{{ btitle }} - {{ bauthor }} - {{ year }}</p>
+        </div>
+
+        <button @click="toggleShowBooks">
+            <span v-if="showBooks">Hide Books</span>
+            <span v-else> Show Books </span>
+    </div>
+
+    <!-- using v-for directive --> 
+    <div id="list-rendering">
+        <ol>
+            <li v-for="todo in todos"> 
+                {{todo.text }}
+            </li>
+        </ol>
+    </div>
+   
+    
+    <!-- link to listfor.js -->
+    <script src="scripts/listfor.js"></script>
+
+    <!-- link to books.js --> 
+    <script src="scripts/books.js"></script>
+
+    <!-- link to conditionalif.js -->
+    <script src="scripts/conditionalif.js"></script>
+</body>
+</html>
